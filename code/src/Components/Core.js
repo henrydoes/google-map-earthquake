@@ -25,13 +25,18 @@ function Get(yourUrl){
 function getMarkerArray (activeCollections) {
     
     let featureList = []
+    // Iterate through the object
     Object.keys(activeCollections).map(collectionKey =>{
       const features = activeCollections[collectionKey]
       Object.keys(features).map(featureKey => {
           if (features[featureKey].type === "Feature") {
+
+            // Get the data needed for this project
             const feature = features[featureKey].geometry.coordinates
             const properties = features[featureKey].properties
             const featureID = featureKey
+
+            // Allocate the data into a proper object for future use
             Object.assign(feature, {Properties: properties}, {FeatureID: featureID})
             featureList = [...featureList, feature]
           }
